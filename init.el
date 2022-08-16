@@ -1,4 +1,5 @@
 (setq inhibit-startup-screen t)
+(tool-bar-mode -1) ;; Hide toolbar
 
 ;; =======================================
 ;; Set up package.el to work with MELPA
