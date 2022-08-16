@@ -58,9 +58,29 @@
 ;; =======================================
 
 ;; =======================================
+;; Download format-all
+;; https://github.com/lassik/emacs-format-all-the-code
+(unless (package-installed-p 'format-all)
+  (package-install 'format-all))
+
+;; Ensure that a default formatter is selected in case 
+;; you don't have one set
+(add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+;; =======================================
+
+;; =======================================
+;; OCaml
+;; Format on save
+(add-hook 'tuareg-mode-hook 'format-all-mode)
+;; =======================================
+
+;; =======================================
 ;; Arrows movement between different windows
 (windmove-default-keybindings)
 ;; =======================================
+
+;; =======================================
+;; Below this line, everything was appended by some tool
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -79,3 +99,4 @@
 ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
+
