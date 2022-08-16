@@ -33,6 +33,7 @@
 
 ;; =======================================
 ;; Download Doom Themes
+;; https://github.com/doomemacs/themes
 (unless (package-installed-p 'doom-themes)
   (package-install 'doom-themes))
 
