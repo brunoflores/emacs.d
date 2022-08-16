@@ -4,8 +4,8 @@
 ;; =======================================
 ;; Set up package.el to work with MELPA
 (require 'package)
-(add-to-list 'package-archives 
-  '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 (package-refresh-contents)
 ;; =======================================
@@ -63,7 +63,7 @@
 (unless (package-installed-p 'format-all)
   (package-install 'format-all))
 
-;; Ensure that a default formatter is selected in case 
+;; Ensure that a default formatter is selected in case
 ;; you don't have one set
 (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
 ;; =======================================
@@ -99,4 +99,3 @@
 ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
-
