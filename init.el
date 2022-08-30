@@ -26,6 +26,29 @@
 (require 'use-package)
 ;; =======================================
 
+(use-package sml-mode
+  :ensure t)
+
+;; =======================================
+;; F-star
+(use-package fstar-mode
+  :ensure t)
+;; =======================================
+
+;; =======================================
+;; Project management
+(use-package ripgrep
+  :ensure t)
+
+(use-package projectile
+  :ensure t
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (projectile-mode 1)
+  (setq projectile-project-search-path '(("~/devel" . 1))))
+;; =======================================
+
 ;; =======================================
 ;; Enable flycheck globally
 (use-package flycheck
@@ -45,7 +68,11 @@
 (use-package lsp-mode
   :ensure t ; Install
   :commands lsp
-  :hook (tuareg-mode . lsp)) ; LSP with OCaml
+  :hook
+  (tuareg-mode . lsp) ; LSP with OCaml
+  (c-mode . lsp)
+  )
+
 ;; =======================================
 
 ;; =======================================
@@ -53,6 +80,29 @@
 (use-package lsp-ui
   :ensure t ; Install
   :hook (tuareg-mode . lsp-ui-sideline-mode))
+;; =======================================
+
+;; =======================================
+;; Lua
+(use-package lua-mode
+  :ensure t)
+;; =======================================
+
+;; =======================================
+;; Git
+;; https://ianyepan.github.io/posts/emacs-git-gutter/
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02)
+  :ensure t)
+
+(use-package git-gutter-fringe
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
+  :ensure t)
 ;; =======================================
 
 ;; =======================================
@@ -135,14 +185,21 @@
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (ivy-mode 1))
+
+;; Sorting and filtering.
+;; This will sort M-x by last used.
+(use-package ivy-prescient
+  :ensure t
+  :init
+  (ivy-prescient-mode 1))
 ;; =======================================
 
 ;; =======================================
 ;; Evil
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1))
+;; (use-package evil
+;;   :ensure t
+;;   :config
+;;   (evil-mode 1))
 ;; =======================================
 
 ;; =======================================
@@ -181,13 +238,29 @@
 (windmove-default-keybindings)
 ;; =======================================
 
+;; =======================================
+;; Always display line numbers
+(global-display-line-numbers-mode)
+;; =======================================
+
+;; Put all backup files here
+(setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
+
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
+(setq-default fill-column 80)
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+
+;; Remove them
+(add-hook 'before-save-hook
+          'delete-trailing-whitespace)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ocamlformat lsp-ui lsp-mode consult-dir orderless consult marginalia vertico magit counsel evil))
+   '(ivy-prescient fstar-mode tidy git-gutter-fringe git-gutter ripgrep ocamlformat lsp-ui lsp-mode consult-dir orderless consult marginalia vertico magit counsel evil))
  '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
