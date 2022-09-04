@@ -224,6 +224,11 @@
   (doom-themes-org-config))
 ;; =======================================
 
+;; R language
+;; https://ess.r-project.org
+(use-package ess
+  :ensure t)
+
 ;; =======================================
 ;; Download format-all
 ;; https://github.com/lassik/emacs-format-all-the-code
@@ -246,6 +251,7 @@
 ;; Put all backup files here
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
 
+;; Display fill-column indicator
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 (setq-default fill-column 80)
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
@@ -260,7 +266,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ivy-prescient fstar-mode tidy git-gutter-fringe git-gutter ripgrep ocamlformat lsp-ui lsp-mode consult-dir orderless consult marginalia vertico magit counsel evil))
+   '(lintr ess ivy-prescient fstar-mode tidy git-gutter-fringe git-gutter ripgrep ocamlformat lsp-ui lsp-mode consult-dir orderless consult marginalia vertico magit counsel evil))
  '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
