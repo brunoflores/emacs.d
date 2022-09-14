@@ -224,10 +224,12 @@
   (doom-themes-org-config))
 ;; =======================================
 
+;; =======================================
 ;; R language
 ;; https://ess.r-project.org
 (use-package ess
   :ensure t)
+;; =======================================
 
 ;; =======================================
 ;; Download format-all
@@ -237,6 +239,27 @@
   ;; Ensure that a default formatter is always selected
   :hook (format-all-mode . format-all-ensure-formatter))
 ;; =======================================
+
+(use-package yasnippet
+  :ensure t)
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
+;; =======================================
+;; Refresh buffers automatically
+(global-auto-revert-mode 1)
+;; =======================================
+
+(savehist-mode 1)
+(save-place-mode 1)
+
+(use-package pdf-tools
+  :ensure t)
+
+(scroll-bar-mode 0)
 
 ;; =======================================
 ;; Arrows movement between different windows
@@ -266,7 +289,21 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lintr ess ivy-prescient fstar-mode tidy git-gutter-fringe git-gutter ripgrep ocamlformat lsp-ui lsp-mode consult-dir orderless consult marginalia vertico magit counsel evil))
+   '(pdf-tools editorconfig lintr ess ivy-prescient fstar-mode tidy git-gutter-fringe git-gutter ripgrep ocamlformat lsp-ui lsp-mode consult-dir orderless consult marginalia vertico magit counsel evil))
+ '(pdf-annot-default-annotation-properties
+   '((t
+      (label . "Bruno Flores"))
+     (text
+      (color . "#ff0000")
+      (icon . "Note"))
+     (highlight
+      (color . "navajo white"))
+     (underline
+      (color . "blue"))
+     (squiggly
+      (color . "orange"))
+     (strike-out
+      (color . "red"))))
  '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
